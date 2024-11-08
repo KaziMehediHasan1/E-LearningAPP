@@ -1,9 +1,10 @@
 "use client";
+import axios from "axios";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-
 import { SubmitHandler, useForm } from "react-hook-form";
+import { toast } from "react-toastify";
 
 interface Input {
   email: string;
@@ -19,12 +20,14 @@ const RegisterPage: React.FC = () => {
     formState: { errors },
   } = useForm<Input>();
 
-  const onSubmit: SubmitHandler<Input> = (data) => {
-    console.log(data);
-    // Here you would typically handle the login request
+  const onSubmit: SubmitHandler<Input> = async (data) => {
+    const res = await axios.post("/Register/api", { ...data });
+    if (res?.data) {
+      toast.success("Registration successful");
+    }
   };
   return (
-    <div className="font-mFont w-[1200px] mx-auto m-36">
+    <div className="font-mFont w-[1200px] mx-auto m-28">
       <div className="flex justify-around ">
         {/** react form hooks started**/}
         <form
@@ -111,7 +114,6 @@ const RegisterPage: React.FC = () => {
                 </p>
               )}
             </div>
-           
           </div>
 
           <button

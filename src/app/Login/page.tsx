@@ -1,11 +1,12 @@
 "use client";
 
+import { signIn } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import { SubmitHandler, useForm } from "react-hook-form";
 
 interface Input {
-  name: string;
+  email: string;
   password: string;
 }
 const LoginPage: React.FC = () => {
@@ -15,12 +16,19 @@ const LoginPage: React.FC = () => {
     formState: { errors },
   } = useForm<Input>();
 
-  const onSubmit: SubmitHandler<Input> = (data) => {
-    console.log(data);
-    // Here you would typically handle the login request
+  const onSubmit: SubmitHandler<Input> = async (data) => {
+    const email = data.email;
+    const password = data.password;
+    console.log(email, password);
+    const res = await signIn("credentials", {
+      redirect: true,
+      email,
+      password,
+    });
+    console.log(res,"user successfully login");
   };
   return (
-    <div className="font-mFont w-[1200px] mx-auto m-36 ">
+    <div className="font-mFont w-[1200px] mx-auto m-28">
       <div className="flex justify-around  p-4 ">
         {/** form image div started**/}
         <div>
@@ -66,16 +74,16 @@ const LoginPage: React.FC = () => {
                 htmlFor="name"
                 className="text-sm font-medium text-gray-700"
               >
-                User Name
+                User Email
               </label>
               <input
                 placeholder="Enter your User name"
-                type="text"
-                {...register("name", { required: "user name is required" })}
+                type="email"
+                {...register("email", { required: "Mail is required" })}
                 className="px-3 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-gray-900"
               />
-              {errors.name && (
-                <p className="text-sm text-red-500">{errors.name.message}</p>
+              {errors.email && (
+                <p className="text-sm text-red-500">{errors.email.message}</p>
               )}
             </div>
 
