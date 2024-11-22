@@ -3,7 +3,7 @@ import UserModel from "@/Models/UserSchema";
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 
-export default NextAuth({
+const handler = NextAuth({
     providers: [
         CredentialsProvider({
             credentials: {
@@ -25,7 +25,6 @@ export default NextAuth({
     ],
     pages: {
         signIn: "/Login",
-
     },
     session: {
         strategy: "jwt"
@@ -37,8 +36,16 @@ export default NextAuth({
             } return token
         },
         async session({ session, token }) {
-            session.user.id = token.id
-            return session
+            if (token) {
+                session.user = {
+                    ...session.user,
+                    id: token.id as string,
+                    email: token.email as string
+                }
+            }
+            return session;
         }
     }
 })
+
+export { handler as GET, handler as POST }

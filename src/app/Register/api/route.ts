@@ -1,6 +1,9 @@
 import ConnectDB from "@/lib/Mongodb";
 import UserModel from "@/Models/UserSchema";
 
+
+
+//CREATE USERS USING DB
 export async function POST(req: Request) {
     interface UserData {
         email: string,
@@ -17,6 +20,18 @@ export async function POST(req: Request) {
     } catch (error) {
         console.error("Error saving user:", error);
         return Response.json({ message: 'Internal Server Error', error: error }, { status: 500 });
+    }
+}
+
+//GET ALL USERS IN DB
+export async function GET() {
+    try {
+        await ConnectDB();
+        const getUsers = await UserModel.find();
+        return Response.json({ getUser: getUsers }, { status: 201 })
+    } catch (error) {
+        console.log(error)
+        return Response.json({ message: "not get the user properly " }, { status: 500 })
     }
 }
 
