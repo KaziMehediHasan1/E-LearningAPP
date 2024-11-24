@@ -39,6 +39,10 @@ const CourseDetailsPage = ({ params }: { params: { id: string } }) => {
       }
     };
     getCourse();
+     // Revalidate every 10 seconds
+     const interval = setInterval(getCourse, 10000);
+
+     return () => clearInterval(interval);
   }, []);
 
   return (

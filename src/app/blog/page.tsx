@@ -68,6 +68,10 @@ const BlogContainer = () => {
       }
     };
     GetBlogs();
+     // Revalidate every 10 seconds
+     const interval = setInterval(GetBlogs, 10000);
+
+     return () => clearInterval(interval);
   }, []);
 
   //GET ALL COURSES IN DB
@@ -84,6 +88,10 @@ const BlogContainer = () => {
       }
     };
     getCourse();
+     // Revalidate every 10 seconds
+     const interval = setInterval(getCourse, 10000);
+
+     return () => clearInterval(interval);
   }, []);
 
   // PAGINATION CONTROLLER

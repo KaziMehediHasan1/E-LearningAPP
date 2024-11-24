@@ -30,6 +30,10 @@ const DashboardMain = () => {
       }
     };
     GetUsers();
+     // Revalidate every 10 seconds
+     const interval = setInterval(GetUsers, 10000);
+
+     return () => clearInterval(interval);
   }, []);
   // GET TOTAL COURSE
   useEffect(() => {
@@ -45,6 +49,10 @@ const DashboardMain = () => {
       }
     };
     getCourse();
+     // Revalidate every 10 seconds
+     const interval = setInterval(getCourse, 10000);
+
+     return () => clearInterval(interval);
   }, []);
   // GET TOTAL BLOGS
   useEffect(() => {
@@ -61,6 +69,10 @@ const DashboardMain = () => {
       }
     };
     getBlogs();
+     // Revalidate every 10 seconds
+     const interval = setInterval(getBlogs, 10000);
+
+     return () => clearInterval(interval);
   }, []);
   return (
     <div className="p-5">

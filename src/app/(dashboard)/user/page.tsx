@@ -32,6 +32,10 @@ const User: React.FC = () => {
       }
     };
     GetUsers();
+     // Revalidate every 10 seconds
+     const interval = setInterval(GetUsers, 10000);
+
+     return () => clearInterval(interval);
   }, []);
 
   // UPDATE USER ROLE

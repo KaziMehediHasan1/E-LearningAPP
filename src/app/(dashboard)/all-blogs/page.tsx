@@ -28,6 +28,10 @@ const AllBlogs = () => {
       }
     };
     Getblogs();
+    // Revalidate every 10 seconds
+    const interval = setInterval(Getblogs, 10000);
+
+    return () => clearInterval(interval);
   }, []);
 
   //DELETING A SPECIFIC BLOGS

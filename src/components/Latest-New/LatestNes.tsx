@@ -35,6 +35,10 @@ const LatestNes = () => {
       }
     };
     GetBlogs();
+     // Revalidate every 10 seconds
+     const interval = setInterval(GetBlogs, 10000);
+
+     return () => clearInterval(interval);
   }, []);
   return (
     <div className="md:w-[1036px] w-[380px] mx-auto font-mFont lg:mt-64 mt-44 md:mb-44 mb-14">

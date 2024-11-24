@@ -44,6 +44,10 @@ const Courses: React.FC = () => {
       }
     };
     getCourse();
+    // Revalidate every 10 seconds
+    const interval = setInterval(getCourse, 10000);
+
+    return () => clearInterval(interval);
   }, []);
 
   // PAGINATION CONTROLLER
