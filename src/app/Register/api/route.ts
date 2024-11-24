@@ -13,7 +13,6 @@ export async function POST(req: Request) {
     try {
         await ConnectDB();
         const { email, name, password }: UserData = await req.json();
-        console.log(email, name, password, "7 no line");
         const userData = await new UserModel({ email, name, password });
         const savedUser = await userData.save();
         return Response.json({ saved: savedUser }, { status: 200 });
@@ -34,4 +33,6 @@ export async function GET() {
         return Response.json({ message: "not get the user properly " }, { status: 500 })
     }
 }
+
+
 

@@ -12,6 +12,7 @@ import { PiEyeThin } from "react-icons/pi";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 // interface for course..
 interface Course {
@@ -66,8 +67,8 @@ const Courses: React.FC = () => {
     }
   };
 
-   //UPDATED COURSE VIEW COUNTING VALUE
-   const handleCourseCountView = async (id: string): Promise<void> => {
+  //UPDATED COURSE VIEW COUNTING VALUE
+  const handleCourseCountView = async (id: string): Promise<void> => {
     try {
       const res = await axios.patch("/courses/api", { id });
       if (res.data.data) {
@@ -96,13 +97,15 @@ const Courses: React.FC = () => {
                 <div key={course._id}>
                   <Link
                     href={`/courses/${course._id}`}
-                    onClick={()=>handleCourseCountView(course._id)}
+                    onClick={() => handleCourseCountView(course._id)}
                     className="card bg-base-100  hover:scale-105 duration-300 overflow-hidden md:w-96 w-80 h-[445px] shadow-xl"
                   >
                     <figure className="px-6 pt-6">
-                      <img
+                      <Image
+                        width={200}
+                        height={200}
                         src={course?.image}
-                        alt="Shoes"
+                        alt="image"
                         className="rounded-xl md:h-52 md:w-96 w-80 h-[180px]"
                       />
                     </figure>
@@ -110,7 +113,10 @@ const Courses: React.FC = () => {
                       <h1>{course?.title.slice(0, 40)}...</h1>
                       <div className=" flex items-center justify-between space-x-4">
                         <div className=" flex items-center space-x-4">
-                          <img
+                          <Image
+                            height={200}
+                            width={200}
+                            alt="avatar image"
                             src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
                             className="rounded-full w-10"
                           />

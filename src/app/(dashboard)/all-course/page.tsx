@@ -1,5 +1,6 @@
 "use client";
 import axios from "axios";
+import Image from "next/image";
 import React, { useRef, useState } from "react";
 import { PiEyeThin } from "react-icons/pi";
 import { toast } from "react-toastify";
@@ -67,7 +68,7 @@ const AllCourse = () => {
       price,
       tag,
       description,
-      longDescription
+      longDescription,
     };
     if (
       !hostImages ||
@@ -284,13 +285,17 @@ const AllCourse = () => {
         <div className="card bg-base-100 w-96 h-[445px] shadow-xl">
           <figure className="px-6 pt-6">
             {imagePreview ? (
-              <img
-                src={imagePreview}
+              <Image
+                height={200}
+                width={200}
+                src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
                 alt="Shoes"
                 className="rounded-xl h-[200px] w-[480px]"
               />
             ) : (
-              <img
+              <Image
+                height={200}
+                width={200}
                 src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
                 alt="Shoes"
                 className="rounded-xl h-[200px] w-[480px]"
@@ -300,7 +305,10 @@ const AllCourse = () => {
           <div className="pl-7 pt-5 px-5 space-y-3">
             <h1>{title ? title.slice(0, 37) : "Enter A Blog Title"}..</h1>
             <div className="w-10 flex items-center  space-x-4">
-              <img
+              <Image
+                height={200}
+                width={200}
+                alt="image"
                 src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
                 className="rounded-full"
               />

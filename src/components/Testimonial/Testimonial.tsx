@@ -1,4 +1,5 @@
 "use client";
+import Image from "next/image";
 import { IoIosArrowRoundForward, IoMdStarHalf } from "react-icons/io";
 
 const Testimonial: React.FC = () => {
@@ -43,7 +44,9 @@ const Testimonial: React.FC = () => {
         <div className="relative">
           {/* Image */}
           <div className="md:w-[400px] w-[320px] mx-auto md:mx-0 md:h-[400px] h-[280px] rounded-lg overflow-hidden shadow-md">
-            <img
+            <Image
+              height={1080}
+              width={1080}
               src="https://img.daisyui.com/images/stock/photo-1665553365602-b2fb8e5d1707.webp"
               alt="carousel"
               className="object-cover w-full h-full"

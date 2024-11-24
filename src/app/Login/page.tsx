@@ -3,8 +3,10 @@ import { signIn } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "react-toastify";
+import axios from "axios";
 
 // ** input type**//
 interface Input {
@@ -13,26 +15,58 @@ interface Input {
 }
 const LoginPage: React.FC = () => {
   const router = useRouter();
+  const [pass, setPass] = useState<string[]>([]);
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<Input>();
 
+  //GET ALL USERS IN DB
+  useEffect(() => {
+    const GetUsers = async () => {
+      try {
+        const res = await axios.get("/Register/api");
+        if (res.data) {
+          setPass(res.data.getUser);
+        }
+      } catch (error) {
+        setPass([]);
+        console.error("Error fetching users:", error);
+      }
+    };
+    GetUsers();
+  }, []);
+
+  // login function
   const onSubmit: SubmitHandler<Input> = async (data) => {
     const email = data.email;
     const password = data.password;
-    console.log(email, password);
-    const res = await signIn("credentials", {
-      redirect: false,
-      email,
-      password,
-    });
-    if (res?.status) {
-      toast.success("Successfully Login");
-      router.push("/");
+    for (let matched of pass) {
+      if (matched?.password !== password) {
+        toast.error("Wrong Password");
+        return;
+      }
+      if (matched?.email !== email) {
+        toast.error("Wrong Email");
+        return;
+      }
+      if (matched?.password === password) {
+        const res = await signIn("credentials", {
+          redirect: false,
+          email,
+          password,
+        });
+        if (res?.status) {
+          toast.success("Successfully Login");
+          router.push("/");
+        }
+        break;
+      }
     }
   };
+
   return (
     <>
       <div className="font-mFont lg:w-[1200px] mx-auto mb-[420px] md:mb-0">

@@ -221,16 +221,21 @@ const BlogContainer = () => {
                 >
                   <div className="card bg-base-100 group hover:scale-105 duration-300 overflow-hidden md:w-96 w-80 h-[445px] shadow-xl">
                     <figure className="px-6 pt-6">
-                      <img
+                      <Image
                         src={blog?.image}
                         alt="Shoes"
+                        height={200}
+                        width={200}
                         className="rounded-xl md:h-52 md:w-96 w-80 h-[180px]"
                       />
                     </figure>
                     <div className="pl-7 pt-5 px-5 space-y-3">
                       <h1>{blog?.title.slice(0, 40)}...</h1>
                       <div className="w-10 flex items-center  space-x-4">
-                        <img
+                        <Image
+                          height={200}
+                          width={200}
+                          alt="image"
                           src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
                           className="rounded-full"
                         />
@@ -246,7 +251,7 @@ const BlogContainer = () => {
                         <div className="flex items-center space-x-2 pr-2">
                           <PiEyeThin />
                           <p className="underline text-gray-400 text-xs">
-                            {blog.viewCount}
+                            {blog?.viewCount}
                           </p>
                         </div>
                       </div>
@@ -322,7 +327,9 @@ const BlogContainer = () => {
                   className="card transition-all transform duration-300 ease-in-out bg-base-100 w-64 mx-auto md:mx-0 h-[410px] shadow-xl"
                 >
                   <figure className="px-6 pt-6">
-                    <img
+                    <Image
+                      height={200}
+                      width={200}
                       src={course.image}
                       alt="Shoes"
                       className="rounded-xl w-80 h-36"
@@ -390,7 +397,10 @@ const BlogContainer = () => {
                     </p>
                     <div className="flex items-center justify-between pr-3">
                       <div className="w-8 flex items-center  space-x-4">
-                        <img
+                        <Image
+                          height={200}
+                          width={200}
+                          alt="image"
                           src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
                           className="rounded-full"
                         />

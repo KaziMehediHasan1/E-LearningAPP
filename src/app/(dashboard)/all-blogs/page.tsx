@@ -1,5 +1,6 @@
 "use client";
 import axios from "axios";
+import Image from "next/image";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 export interface AllBlogs {
@@ -63,7 +64,10 @@ const AllBlogs = () => {
             <p>{blog.description.slice(0, 70)}..</p>
             <p>{blog.tag.join(" , ")}</p>
             <div className="w-14 mx-auto h-14">
-              <img
+              <Image
+                height={200}
+                width={200}
+                alt="image"
                 src={blog.image}
                 className="rounded-full w-14 mx-auto h-14"
               />

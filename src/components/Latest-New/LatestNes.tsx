@@ -52,12 +52,7 @@ const LatestNes = () => {
         {blogs.length > 0 ? (
           blogs.slice(0, 1).map((blog) => (
             <>
-              <Link
-                href={`/blog/${blog._id}`}
-                onClick={() => handleUpsert(blog._id)}
-                key={blog._id}
-                className="md:w-[420px] h-[400px] space-y-8 "
-              >
+              <div key={blog._id} className="md:w-[420px] h-[400px] space-y-8 ">
                 <Image
                   alt="news"
                   className="md:w-[420px] w-[380px] h-[250px] rounded-lg"
@@ -78,12 +73,16 @@ const LatestNes = () => {
                       Class, launched less than a year ago by Blackboard
                       co-founder Michael Chasen, integrates exclusively...
                     </p>
-                    <Link className="underline text-[#696984] text-xs" href="/">
+                    <Link
+                      href={`/blog/${blog._id}`}
+                      onClick={() => handleUpsert(blog._id)}
+                      className="underline text-[#696984] text-xs"
+                    >
                       Read more
                     </Link>
                   </div>
                 </div>
-              </Link>
+              </div>
             </>
           ))
         ) : (

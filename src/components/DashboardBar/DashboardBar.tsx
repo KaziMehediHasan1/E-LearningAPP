@@ -1,18 +1,13 @@
 "use client";
 import React, { useState } from "react";
 import { ImBlog } from "react-icons/im";
-import { FaReadme, FaPencilRuler } from "react-icons/fa";
+import { FaReadme, FaPencilRuler, FaHome } from "react-icons/fa";
 import { LiaChalkboardTeacherSolid } from "react-icons/lia";
-import { PiStudentThin } from "react-icons/pi";
 import { GoCodeReview } from "react-icons/go";
 import { CgProfile } from "react-icons/cg";
-import { IoIosLogOut } from "react-icons/io";
 import { AiOutlineUsergroupDelete } from "react-icons/ai";
 import { RxDashboard } from "react-icons/rx";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { signOut } from "next-auth/react";
-import { CiMenuBurger } from "react-icons/ci";
 import { RiMenuFold3Fill, RiMenuFold4Fill } from "react-icons/ri";
 import Image from "next/image";
 
@@ -64,70 +59,78 @@ const menus: MenuItem[] = [
     title: "Users",
     href: "/user",
   },
-  {
-    icon: <IoIosLogOut className="md:w-7 md:h-7 w-5 h-5" />,
-    title: "Logout",
-    href: `() => signOut()`,
-  },
 ];
 
 //** conditionally show routes  **//
-
 const DashboardBar = () => {
   const [menuBar, setMenuBar] = useState<boolean>(false);
   console.log(menuBar);
   return (
-    <div className="space-y-8 p-4 md:p-0 font-mFont">
-      <RiMenuFold4Fill
-        onClick={() => setMenuBar(true)}
-        className={`${menuBar ? "hidden" : "block"}  w-5 h-5 md:hidden block`}
-      />
-      <RiMenuFold3Fill
-        onClick={() => setMenuBar(false)}
-        className={`${menuBar ? "block" : "hidden"} w-5 h-5 md:hidden block`}
-      />
-      <Link href="/" className="flex items-center pl-3">
+    <div className="font-mFont">
+      {/* MOBILE DEVICE TOGGLE BAR START */}
+      <div className="p-4">
+        <RiMenuFold4Fill
+          onClick={() => setMenuBar(true)}
+          className={`${menuBar ? "hidden" : "block"}  w-7 h-7 md:hidden block`}
+        />
+        <RiMenuFold3Fill
+          onClick={() => setMenuBar(false)}
+          className={`${menuBar ? "block" : "hidden"} w-7 h-7 md:hidden block`}
+        />
+      </div>
+      {/* MOBILE DEVICE TOGGLE BAR END */}
+
+      <Link href="/" className="md:flex items-center hidden  pl-3 mt-2 md:mt-0">
         <Image
           alt="logo"
           height={40}
           width={40}
           src="/images/logo.png"
-         className="w-10 h-10"
+          className="md:w-10 md:h-10 w-8 h-8 "
         />
-        <span className="text-[18px] px-3 pr-4  md:block hidden font-semibold">
+        <span className="text-[18px] px-3 pr-4 md:block hidden font-semibold">
           Learn With Mehedi
         </span>
       </Link>
+      {/* FOR MOBILE DEVICE */}
+      <Link
+        href="/"
+        className={`text-[18px] flex items-center mb-2  space-x-2 px-5 md:hidden ${
+          menuBar ? "hidden" : "block"
+        }`}
+      >
+        <FaHome className="w-5 h-5" />
+        <span>Home</span>
+      </Link>
       {menus.map((menu) => (
-        <div key={menu.href}>
-          <div className={`w-[12%] md:w-[8%] lg:w-[16%] xl:w-[14%] p-1 pl-5 space-y-3 `}>
-            <div className="space-x-3 space-y-8">
-              
-              <Link
-                href={menu.href}
-                key={menu.title}
-                className="md:flex items-center gap-4 cursor-pointer hidden"
-              >
+        <div key={menu.href} className="">
+          <div
+            className={`md:w-[8%] lg:w-[16%] xl:w-[14%] pl-5 space-y-3 hidden md:block`}
+          >
+            {/* LARGE DEVICE RESPONSIVE BAR */}
+            <Link href={menu.href} key={menu.title}>
+              <div className="md:flex mt-8 items-center space-x-5">
                 <span>{menu.icon}</span>
                 <span className="text-[17px]">{menu.title}</span>
-              </Link>
-
-              {/* RESPONSIVE FOR MOBILE DEVICES  */}
-
-              <Link href={menu.href} className={`flex items-center md:hidden`}>
-                <span className={`${menuBar ? "block md:hidden" : "hidden"}`}>
-                  {menu.icon}
-                </span>
-                <span
-                  className={`text-[15px] ${
-                    menuBar ? "block md:hidden" : "hidden"
-                  }`}
-                >
-                  {menu.title}
-                </span>
-              </Link>
-
-            </div>
+              </div>
+            </Link>
+          </div>
+          {/* RESPONSIVE FOR MOBILE DEVICES  */}
+          <div
+            className={`${
+              menuBar && "dropdown dropdown-bottom block"
+            } md:hidden `}
+          >
+            <Link
+              onClick={() => setMenuBar(true)}
+              href={menu.href}
+              key={menu.title}
+            >
+              <div className="flex dropdown-content p-1 space-x-2 pl-5 py-3 z-10 bg-white items-center">
+                <span>{menu.icon}</span>
+                <span className="text-[17px]">{menu.title}</span>
+              </div>
+            </Link>
           </div>
         </div>
       ))}

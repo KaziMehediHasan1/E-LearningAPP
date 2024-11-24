@@ -10,11 +10,11 @@ const DashboardLayout = ({
 }>) => {
   return (
     <section>
-      <div className="h-screen flex font-mFont">
+      <div className="md:h-screen md:flex font-mFont">
         {/* LEFT */}
         <DashboardBar />
         {/* RIGHT */}
-        <div className="bg-blue-50 w-[86%] md:w-[92%] lg:w-[84%] xl:w-[86%] overflow-scroll">
+        <div className="bg-blue-50 md:w-[92%] lg:w-[84%] xl:w-[86%] overflow-scroll">
           {children}
         </div>
       </div>

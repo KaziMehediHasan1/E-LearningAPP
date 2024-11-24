@@ -2,6 +2,7 @@
 
 import { AllBlogs } from "@/app/(dashboard)/all-blogs/page";
 import axios from "axios";
+import Image from "next/image";
 import { useEffect, useState } from "react";
 
 const BlogDetailsPage = ({
@@ -36,7 +37,9 @@ const BlogDetailsPage = ({
         <>
           {blog._id === params.id && (
             <div>
-              <img
+              <Image
+              height={1080}
+              width={1980}
                 src={blog.image}
                 alt="blog"
                 className="md:w-full w-[400px] mt-1 mx-auto md:mx-0 md:h-[450px] h-52 rounded-lg md:rounded-none object-cover"
@@ -58,7 +61,9 @@ const BlogDetailsPage = ({
                 <div className="bg-slate-400 w-full h-[1px]"></div>
                 <div className="flex items-center justify-between">
                   <div className="flex items-center space-x-3">
-                    <img
+                    <Image
+                    height={200}
+                    width={200}
                       src={blog.image}
                       alt="author"
                       className="rounded-xl h-14 w-14"

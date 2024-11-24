@@ -1,5 +1,6 @@
 "use client";
 import axios from "axios";
+import Image from "next/image";
 import { useState, useEffect } from "react";
 import { AiFillStar } from "react-icons/ai";
 import {
@@ -39,7 +40,7 @@ const CourseDetailsPage = ({ params }: { params: { id: string } }) => {
     };
     getCourse();
   }, []);
-  
+
   return (
     <div className="w-full mx-auto md:mt-20 font-mFont mb-20">
       {courses?.map(
@@ -47,9 +48,12 @@ const CourseDetailsPage = ({ params }: { params: { id: string } }) => {
           course._id === params.id && (
             //PARENT DIV
             <div key={course._id}>
-              <img
+              <Image
+                height={1080}
+                width={1080}
+                alt="image"
                 src={course.image}
-                className="md:w-full w-[400px] mx-auto md:mx-0 md:mt-0 mt-1 md:rounded-none rounded-md md:h-96 h-[250px] bg-cover object-cover object-contain md:relative"
+                className="md:w-full w-[400px] mx-auto md:mx-0 md:mt-0 mt-1 md:rounded-none rounded-md md:h-[434px] h-[250px] object-cover md:relative"
               />
               {/* CREATE OVERVIEW AND RIGHT OF PRICE SECTION */}
               <div className="flex md:justify-between items-center md:w-[80%] w-[350px] mx-auto ">
@@ -134,7 +138,10 @@ const CourseDetailsPage = ({ params }: { params: { id: string } }) => {
                     <div className="space-y-3 md:px-0 px-7">
                       <div className="space-y-3">
                         <div className="flex items-center space-x-3">
-                          <img
+                          <Image
+                            height={200}
+                            width={200}
+                            alt="image"
                             src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
                             className="rounded-full avatar w-12"
                           />
@@ -154,7 +161,10 @@ const CourseDetailsPage = ({ params }: { params: { id: string } }) => {
                       <div className="w-full h-[1px] bg-gray-200"></div>
                       <div className="space-y-3">
                         <div className="flex items-center space-x-3">
-                          <img
+                          <Image
+                            height={200}
+                            width={200}
+                            alt="image"
                             src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
                             className="rounded-full avatar w-12"
                           />
@@ -177,8 +187,10 @@ const CourseDetailsPage = ({ params }: { params: { id: string } }) => {
                   {/* ONLY FOR MOBILE DEVICE | IS IT PRICING SECTION */}
                   <div className="bg-red-200 mt-8 md:hidden block rounded-lg p-3">
                     <div className="space-y-5">
-                      <img
-                        src={course.image}
+                      <Image
+                        height={200}
+                        width={200}
+                        src={course?.image}
                         alt="course"
                         className="w-80 mx-auto rounded-xl h-52"
                       />
@@ -229,8 +241,10 @@ const CourseDetailsPage = ({ params }: { params: { id: string } }) => {
                 <div className="w-[40%] hidden md:block absolute right-0  top-80">
                   <div className="w-80 mx-auto bg-white h-[700px] rounded-xl">
                     <div className="p-4">
-                      <img
-                        src={course.image}
+                      <Image
+                        height={200}
+                        width={200}
+                        src={course?.image}
                         alt="course"
                         className="rounded-t-xl border h-44 w-full"
                       />
