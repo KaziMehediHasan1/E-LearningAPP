@@ -1,14 +1,12 @@
 "use client";
 import { AllBlogs } from "@/app/(dashboard)/all-blogs/page";
 import axios from "axios";
+import { NextPage } from "next";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
-const BlogDetailsPage = ()=> {
+const BlogDetailsPage:NextPage<{params:{id:string}}> = ({params})=> {
   const [blogs, setBlogs] = useState<AllBlogs[]>([]);
-  const router = useRouter();
-  const { id } = router.query;
   //GET ALL BLOGS IN DB
   useEffect(() => {
     const getBlogs = async () => {
@@ -24,10 +22,6 @@ const BlogDetailsPage = ()=> {
       }
     };
     getBlogs();
-     // Revalidate every 10 seconds
-     const interval = setInterval(getBlogs, 10000);
-
-     return () => clearInterval(interval);
   }, []);
   
 
@@ -35,7 +29,7 @@ const BlogDetailsPage = ()=> {
     <div className="w-full mx-auto md:mt-20 font-mFont mb-20">
       {blogs.map((blog) => (
         <>
-          {blog._id === id && (
+          {blog._id === params.id && (
             <div>
               <Image
               height={1080}
