@@ -2,16 +2,11 @@
 
 import { AllBlogs } from "@/app/(dashboard)/all-blogs/page";
 import axios from "axios";
+import { NextPage } from "next";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 
-const BlogDetailsPage = ({
-  params,
-}: {
-  params: {
-    id: string;
-  };
-}) => {
+const BlogDetailsPage:NextPage<{params:{id:string}}> = ({params})=> {
   const [blogs, setBlogs] = useState<AllBlogs[]>([]);
   //GET ALL BLOGS IN DB
   useEffect(() => {
